@@ -1,29 +1,10 @@
-const path = require('path');
-const webpack = require('webpack');
+const { resolve } = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
-const { config } = require('./config/index');
 
 module.exports = {
-  mode: 'development',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'assets/bundle.js',
-  },
+  entry: resolve(__dirname, 'src', 'index.js'),
   resolve: {
     extensions: ['.js', '.jsx'],
-  },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    historyApiFallback: true,
-    host: '0.0.0.0',
-    compress: true,
-    hot: true,
-    port: 3000,
-    publicPath: '/',
   },
   module: {
     rules: [
@@ -41,24 +22,21 @@ module.exports = {
         ],
       },
       {
-        test: /\.(s*)css$/i,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
+        test: /\.(svg|png|jpe?g|gif)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images',
           },
-          'css-loader',
-          'sass-loader',
-        ],
+        },
       },
     ],
   },
   plugins: [
-    config.isdev ? new webpack.HotModuleReplacementPlugin() : () => {},
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html'),
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'assets/[name].css',
+      template: resolve(__dirname, 'public', 'index.html'),
+      favicon: resolve(__dirname, 'public', 'favicon.ico'),
     }),
   ],
 };
