@@ -22,7 +22,7 @@ Repository for Portfolio Maker project
 
 ## 💻Authors
 
-- [Milena Castro](https://github.com/Milena28-dev)
+- [Milena Castro](https://github.com/DevMilenaCastro)
 - [Pablo Verduzco](https://github.com/pabloverduzcos)
 - [Diego Osorio](https://github.com/Diegoalesco95)
 
